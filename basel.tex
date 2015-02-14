@@ -1,0 +1,631 @@
+\documentclass[11pt]{article}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{float}
+\usepackage{color}
+\usepackage{picture}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage[utf8]{inputenc}
+\usepackage[linktocpage=true]{hyperref}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{lscape}
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+% Used for the figures that have been inserted into the document.
+\floatstyle{plain} 
+\restylefloat{figure}
+
+% Used so as not to indent paragraphs.
+\setlength\parindent{0pt}
+
+% Used for syntax highlighting in code.
+\definecolor{skyblue}{rgb}{0.53, 0.81, 0.92}
+\definecolor{lightred}{rgb}{0.90, 0.36, 0.36}
+\definecolor{darkkhaki}{rgb}{0.71, 0.51, 0.06}
+
+% Default parameters for listings package.
+\lstset {
+	tabsize=4,
+	keywordstyle=\color{darkkhaki},
+	commentstyle=\color{blue},
+	showstringspaces=false,
+	stringstyle=\color{lightred},
+	frame=TLRB,
+	captionpos=b,
+	basicstyle=\small\ttfamily,
+	breaklines=true
+}
+
+% Default parameters for hyperref package.
+\hypersetup {
+	pdftoolbar=true,
+	pdfmenubar=true,
+	colorlinks=true,
+	linkcolor=red,
+	citecolor=green,
+	filecolor=magenta,
+	urlcolor=cyan
+}
+
+\newcommand{\superscript}[1]{\ensuremath{^{\textrm{#1}}}}
+\newcommand{\subscript}[1]{\ensuremath{_{\textrm{#1}}}}
+
+\numberwithin{equation}{section}
+%\setcounter{secnumdepth}{0}
+\begin{document}
+
+\input{./title1.tex}
+
+\pagebreak
+
+\renewcommand\contentsname{{\Huge Contents}\vspace{0.5cm}}
+\addtocontents{toc}{~\hfill\textbf{Page}\par}
+\cleardoublepage
+\phantomsection
+\addtocontents{toc}{\linespread{1.5}\selectfont}
+\addcontentsline{toc}{section}{Contents}
+\setcounter{tocdepth}{8}
+
+\tableofcontents
+
+\cleardoublepage
+\phantomsection
+%\addcontentsline{toc}{section}{List of Figures}
+\renewcommand\listfigurename{{\Huge List of Figures}\vspace{0.5cm}}
+\addtocontents{lof}{\linespread{1.5}\selectfont}
+\addtocontents{lof}{~\hfill\textbf{Page}\par}
+%\listoffigures
+
+\pagebreak
+
+\section{Basel 1}
+\medskip
+
+\subsection{Introduction}
+\medskip
+
+The Bis Accord 1988, known as Basel-I was amended in 1996 to ensure that bank keeps enough capital for the risk it takes.
+Actually, regulators tried to minimize the default probability of bank. The risk that failure of a large bank will cause failure of other banks and financial institutions is called \textbf{Systemic risk}. To avoid collapse of financial system, government is mainly concerned with systemic risk. When a large financial institution goes into financial difficulties,  government either allow them to fail and put financial system into risk or government bail out the financial institution which makes them less vigilant towards risk as they know they are \textbf{too big to fail}.
+
+\subsection{Background}
+\medskip
+
+\begin{itemize}
+\item Before 1988, banks were required to keep minimum level for the ratio of capital to total assets. In some countries, regulations were enforced more diligently than others. Thus, there was global competitions between banks because the countries having less capital regulations have competitive edge over the others having more regulations.
+\item There were some over the counter derivatives such as currency swaps, interest rate swaps for which the transactions were ``off-balance-sheet" implying they had no effect on level of assets reported by bank. 
+
+\end{itemize}
+
+\subsection{Main framework}
+\medskip
+
+\subsubsection{The capital adequacy ratio}
+\medskip
+
+Capital adequacy is the ratio of bank's capital to the risk weighted assets. This ratio is used to protect depositors and promote the stability of financial system. The Basel-I accord required banks to keep the ratio of a bank’s assets to its capital to be less than 20.
+
+\subsubsection{The Cooke ratio}
+\medskip
+
+The ratio that calculates the amount of capital a bank should have as a percentage of it's total risk adjusted assets is called Cooke ratio. It was developed to ensure that all banks had enough capital set aside to lessen the risk on their respective assets. The Basel-I accord required banks to keep cooke ratio of greater than or equal to 8\%. 
+\begin{itemize}
+\item\textbf{Calculation}
+Total risk weighted assets for a bank with N on-balance-sheet items and M off-balance-sheet items: 
+\begin{center}
+$ \Sigma_{i=1}^{N} w_i L_i + \Sigma_{j=1}^{M} w_j$* $C_j $ 
+\end{center}
+where the first summation corresponds to on-balance-sheet items and second correspond to off-balance-sheet items. $L_i$ is a principal of $i^{th}$ item and $w_i$ is the risk weight associated with it. The risk associated with OECD government bonds, OECD public sector entities, uninsured residential mortgage loans and other corporate bonds are  0\%, 20\%, 50\% and 100\%  respectively. $w_j$* is the risk weight of the counter party for the $j^{th}$ off-balance-sheet item.\medskip
+
+\hspace{1cm}Credit equivalent amount is a method prescribed by central bank to quantify the credit risk of off-balance-sheet instruments such as interest rate or foreign exchange derivative by translating value of such instruments into risk equivalent credits. $C_j$ is the credit equivalent amount of $j^{th}$ item given by $ max(V,0)+aL $ where V is the current value of derivative to the bank, a is an add-on factor and L is the principal amount for over-the-counter derivative and $aL$ is an allowance for the possibility of the exposure increasing in the future. If we are dealing with non-derivatives, we apply conversion factor to the principal amount to calculate credit equivalent amount.   
+
+\end{itemize}
+
+\subsubsection{Capital requirement}\medskip
+
+There are two components of capital under Basel 1 regulation:
+\begin{itemize}
+\item\textbf {Tier 1 Capital}: Under this component, shareholders' equity and non-cumulative perpetual preferred stock lies. This consist of amount paid up to purchase stock of the Bank, retained profits minus accumulated losses. In India, it is Net owned Funds. At least 4 percent of risk weighted assets is contained in tier 1.
+\item\textbf {Tier 2 Capital}: It includes cumulative perpetual preferred stock, subordinate debt, undisclosed reserves etc.
+Also, under the accord, 2 percent of risk-weighted assets be in common equity.
+\item \textbf{Tier 3 Capital}: It basically contains capital to meet market risk.
+\end{itemize}
+Sometimes, banks are asked to maintain more capital than required by Basel II. In, India RBI asked  banks to maintain 9\% instead of 8\%.
+
+\subsection{Netting}
+\medskip
+
+Netting is a clause which states that if a company defaults on one contract it has with a counterparty then it must default on all outstanding contracts with the counterparty. For example, suppose a financial institution A has three contacts with it's counterparty B of worth \$10, \$20, -\$30. Then, the contacts will worth  -\$10, -\$20, +\$30 to B. If B defaults on first contact then without netting he can gain \$10 but with netting he is compelled to default on all three contracts and will have no profit in the given scenario.
+
+  \hspace{1cm} If a financial institution have a portfolio of N derivative contracts with a counterparty. Then, without netting financial institution losses $(1-R)\sum_{i=1}^N max(V_i,0) $ but with netting it losses $(1-R) max(\sum_{i=1}^N V_i,0)$ where R is recovery rate and $V_i$ is no default value of ith contract.
+  
+  \hspace{1cm} The 1988 Accord was modified to allow banks to
+reduce their credit equivalent totals by considering netting. Now, the credit equivalent amount is given by 
+\begin{center}
+$max \left(\Sigma_{i=1}^{N} V_i,0 \right) + (0.4+0.6\times NRR) \Sigma_{i=1}^{N} a_i L_i$
+\end{center} 
+ 
+ where NRR is termed as Net Replacement ratio and is given by 
+ $\frac{max \left(\Sigma_{i=1}^{N} V_i,0 \right)}{\Sigma_{i=1}^{N} max(V_i,0)}$
+ 
+\subsection{The 1996 Amendment}
+\medskip
+
+The proposal to amend the 1988 accord came to be known as the 1996 amendment. The amendment involves keeping capital for the market risks associated with trading activities. Banks were required to use fair value accounting such as marking to market for bank's trading book while for banking book there was no such restriction. The amendment introduced a capital charge for the market risk associated with all items in the trading
+book. It outlined a standardized approach for measuring the capital charge for market risk by assigning capital to each of debt securities, equity securities, foreign exchange risk, commodities risk, and options. No account was taken of
+correlations between different types of instrument. The more sophisticated banks with well-established risk management functions were allowed to use an internal model-based approach which involved calculating a value-at-risk measure.
+The value-at-risk measure used in the internal model-based approach is calculated with a 10-day time horizon and a 99\% confidence level. The capital requirement is
+\begin{center}
+ $max(VaR_{t-1},m_{c} \times VaR_{avg} +SRC)$
+ \end{center}
+ where $m_c$ is a multiplicative factor whose minimum value is 3, $VaR_{t-1}$ is previous day's value at risk, $VaR_{avg}$ is the average value of VaR of last 60 days and SRC is specific risk change. For a corporate bond, interest rate risk is calculated by VaR while credit risk is calculated by SRC. hence, the total capital required for credit risk and market risk are given by 
+ \begin{center}
+ Total capital = $.08 \times $ (Credit risk RWA + Market risk RWA)
+ \end{center}
+ 
+\paragraph{Back-testing}\mbox{}
+\medskip
+
+Under the amendment, one-day 99\% VaR needs to be back-tested over the previous 250 days. If the actual loss that
+occurred on a day is greater than the VaR level calculated for the day, an ``exception” is recorded. Counting the number of exceptions on previous 250 days, the value of $m_c$ is set above 3. If the number of exceptions is 10 or more, the Basel Amendment requires the multiplier to be set at 4. 
+
+\subsection{Drawbacks}
+\medskip
+
+Basel I was supposed to create a safer banking world but it failed miserably in that task. The major reasons are: 
+\begin{itemize}
+\item Many rules were given but no one was actually there to manage them properly. Thus, Basel I lacked implementation. lack of proper supervisors and regulators was the major drawback.
+
+\item Basel II did not take account risk of fraud, fire, etc. Hence, no capital was kept aside for such situations. 
+
+\item Under 1988 Basel accord, all loans carry equal amount of risk weight of 100\% but AAA rated bond are less risky. Thus, risks were not properly managed for each kind of bond.
+
+\item In Basel I there was no model of default correlation.
+\end{itemize} 
+Thus, for proper risk management something more efficient was necessary and hence Basel II came into existence. 
+
+
+
+\pagebreak
+\section{Basel II}
+\medskip
+
+In Basel \Rmnum{2}, loans to risk free corporate bonds of rating AAA were treated in the same way as loan to more risky bonds of rating BBB. Also, default correlations between banks were not taken into account. So, Basel II came into existence. Basel II is the second of the Basel Committee on Bank Supervision's recommendations, and unlike the first accord, Basel I, where focus was mainly on credit risk, the purpose of Basel II was to create standards and regulations on how much capital financial institutions must have put aside. Banks need to put aside capital to reduce the risks associated with its investing and lending practices. Basel II is based on three pillars of which first pillar is based on capital requirement, second pillar is for supervisory review and third pillar is for market discipline.
+
+\subsection{The First Pillar:- Minimum Capital Requirement}
+\medskip
+
+Credit rating of counterparties is taken into consideration while calculating capital requirement for credit risk in banking book. In Basel \Rmnum{2} total capital is given by 
+\begin{center}
+$Total\: capital\: = \: .08\: \times \:  $($credit\: risk\: RWA \:$ + $market\: risk\: RWA \:$ + $Operational\: risk\: RWA \:$)
+\end{center}
+
+where Operational Risk is included in Basel II to reduce the risk of loss resulting from inadequate or failed internal process, people and system. 
+
+
+
+\subsubsection{Credit Risk capital calculation}
+
+There are three approaches for calculating credit risk capital under Basel II:
+\paragraph{Standard Approach}\mbox{} 
+\medskip
+
+\hspace{1cm}Under this approach, risk weights are specified by regulators for corporations and institutions based on credit ratings supplied by credit rating agencies. Banks which are not sufficient to follow internal rating approaches follow standard approach. Risk weight table is given by
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|p{2cm}|p{1.5cm}|p{1cm}|p{1.5cm}|p{1.5cm}| p{1cm}|p{1cm}|p{1.5cm}|}
+\hline & AAA to AA- & A+ to A- & BBB+ to BBB- & BB+ to BB- & B+ to B- & Below B- & unrated\\
+\hline country & 0 & 20 & 50 & 100 & 100 & 150 & 100\\
+\hline Banks & 20 & 50 & 50 & 100 & 100 & 150 & 50\\
+\hline corporations & 20 & 50 & 100 & 100 & 150 & 150 & 100\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Risk weight for each bond}
+\label{tab:q_1}
+\end{table}
+
+
+Suppose, the bank holds 100 million as asset out of which 40 million is of corporation bond rated AAA and 60 million is of government bond rated BBB then by \hyperref[tab:q_1]{above} table total risk weighted asset is $ 0.2\times40 + 0.5\times60 = 38 $ million. 
+
+\subparagraph{Adjustment for collateral}\mbox{} \medskip
+
+\hspace{1cm}For adjusting risk weight of collateral, simple and comprehensive approaches are used. In simple approach, risk weight of the counter party is replaced by risk weight of the collateral for the part of exposure covered by collateral and for remaining part counterparty's risk weight is used. The risk weight applied to the collateral should be at least 20\%. For example, 100 million exposure to particular counterparty of risk weight 100\% is secured by collateral worth 60 million with risk weight 50\% then risk weighted asset is given by $ 60\times0.5+1\times40=70 $.\\
+\hspace{1 cm} Under the comprehensive approach, banks allow  possible increases in the exposure by adjusting the size of their exposure upward and allow possible decrease in the value of collateral by adjusting the size of collateral downward. A new exposure equal to the excess of the adjusted exposure over the adjusted value of the collateral is calculated
+and the counterparty’s risk weight is applied to this exposure.    
+
+\paragraph{Internal Rating Based approach}\mbox{} \medskip
+
+\hspace{0.5cm}Under this approach, it is assumed that banks have taken care of expected loss while pricing the derivatives and products. So, this approach requires to calculate unexpected losses which arise with some 99.9 percent confidence level in one year time horizon. This unexpected loss is equal to capital required which is equal to VaR - Expected loss where VaR is calculated using Gaussian Copula model.
+
+\begin{figure}[H]
+\begin{center}
+		\centering
+		\resizebox{1\linewidth}{!}{\includegraphics{Unexpectloss}}
+		\caption{The Loss Probability Density Function and the Capital Required by an Institution}
+		\label{fig:q1_f1_a}
+\end{center}
+\end{figure} 
+
+Thus, the capital required is
+\begin{center}
+  $EAD \times LGD \times(WCDR-PD)$
+\end{center}
+where EAD is exposure at default, LGD is loss given default where it is given by probability of default multiplied by probability of loss given default, PD is the probability that counter party will default within a year, WCDR is the worst case probability of default with 99.9\% confidence level for a time horizon of a year given by 
+\begin{center}
+	$ WCDR $ = $N\left[\frac{N^{-1}(PD) + \sqrt{\rho}N^{-1}(0.999)}{\sqrt{1-\rho}} \right]$
+\end{center} 
+where $\rho$ is copula correlations between each pair of obligors.  
+ 
+\hspace{1cm} If we have N number of counterparties then capital required is the excess of 99.9\% worst case loss over expected loss given by 
+\begin{center}
+ $\Sigma_{i=1}^{N} EAD_i \times LGD_i \times (WCDR_i-PD_i)$
+\end{center}
+where i is the $i^{th}$ counterparty.
+
+\subparagraph{Corporate, Sovereign and Bank Exposures}\mbox{} \medskip
+
+\hspace{1cm}Basel II assumes a relationship between the correlation parameter $\rho$ and the probability
+of default PD for corporate, sovereign and bank exposures which is given by $\rho$ = $0.12\times(1+e^{-50}\times PD)$. As, the company becomes less creditworthy, it's probability of default increases and $\rho$ decreases. In this case, the capital required for counterparty is given by 
+\begin{center}
+$EAD \times LGD \times (WCDR-PD) \times MA$
+\end{center}
+where MA is the maturity adjustment given by $MA$ = $\frac{1+(M-2.5) \times b}{1-1.5 \times b}$ where M is the maturity of exposure and b is given by $b=[{0.11852-0.05478 \times ln(PD)}]^{2}$. In IRB approach, Basel committee provide PD, LGD and EAD while WCRD is given by bank. 
+
+\paragraph{Advanced IRB}\mbox{}
+\medskip
+
+\hspace{1cm}It is more or less same as IRB. In this approach, banks also provide it's own estimate of PD, LGD and EAD.
+
+\subparagraph{Retail Exposure}\mbox{}
+\medskip
+
+\hspace{1cm}In this case, we merge IRB and advanced IRB approaches. It does not contain any maturity adjustment and capital is given by
+\begin{center}
+$EAD \times LGD \times (WCDR-PD)$
+\end{center}
+WCDR is calculated by using copula model after calculating $\rho$ which is given by 0.15 for residential mortgages, 0.04 for qualifying revolving exposures and for others it is given by 
+\begin{center}
+ $0.03+0.13\times e^{-35}\times PD$
+\end{center}
+Thus, we see that correlations are much lower for retail exposures than corporate exposures. 
+
+\paragraph{Guarantees and Credit Derivatives}\mbox{}
+\medskip
+
+The Basal committee developed \textbf{credit substitution approach} for handling guarantees. If, a AAA rated company guarantees a loan to BBB rated company then under this approach credit rating of guarantor is substituted for credit rating of borrower. 
+
+\subsubsection{Operational risk}
+\medskip
+
+Operational risk focuses on the risks arising from the people, systems and processes through which a company operates. It can also include other classes of risk, such as fraud, legal risks, physical or environmental risks. The main focus of Basel II is to to keep same amount of capital as that required by Basel I by decreasing credit risk capital requirement and bringing in operational risk capital requirement. Three approaches are used to calculate capital which are Basic Indicator, Standardized and Advanced Measurement approaches.
+\paragraph{Basic Indicator Approach}\mbox{} 
+\medskip
+
+Based on the original Basel Accord, banks using the basic indicator approach must hold capital for operational risk equal to the average over the previous three years of a fixed percentage of positive annual gross income. Usually, the fixed percentage is set to 15\%. Figures for any year in which annual gross income is negative or zero should be excluded from both the numerator and denominator when calculating the average. This approach is applied by the banks that either do not qualify for or are not obliged by their regulator to use one of the more sophisticated approaches. 
+
+\paragraph{Standardized Approach}\mbox{}
+\medskip
+
+Banks can qualify to use this approach only if they satisfy particular conditions such as active involvement of board of directors and senior management in operational risk framework, implementation of operational risk management system with integrity, etc. Under this Approach, banks’ activities are divided into eight business lines: corporate finance, trading \& sales, retail banking, commercial banking, payment \& settlement, agency services, asset management, and retail brokerage. Within each business line, gross income is a broad indicator that serves as a proxy for the scale of business operations and thus the likely scale of operational risk exposure within each of these business lines. The capital charge for each business line is calculated by multiplying gross income by a factor assigned to that business line. The factor normally varies from 18\% to 12\%. Thus, it is mainly similar to that of basic approach with different factors applied for different business lines. 
+
+\paragraph{Advanced Measurement Approach}\mbox{}
+\medskip
+
+Under this approach, the banks are allowed to develop their own empirical model to quantify required capital for operational risk. One common approach that the banks generally use is Loss Distribution Approach. Banks can use this approach only subject to approval from their local regulators. Once a bank has been approved to adopt this approach, it cannot revert to a simpler approach without supervisory approval. This approach uses data elements such as Internal loss data, External data, Scenario analysis and Business environment and internal control factors. There are many benefits of this approach which are reduction in regulatory and economic capital, sending a clear message of solid and sound risk management to shareholders, clients, rating agencies and the market.
+
+\subsection{The Second Pillar:- Supervisory review}
+\medskip
+
+It is meant to complete the pillar I by proper regulation of rules given by pillar I. Pillar II provides supervisors the power and responsibility to monitor whether banks are following rules given in pillar I properly or not. Supervisors should review and evaluate banks’ internal capital adequacy assessments and strategies. Supervisors should take appropriate supervisory action if banks are not operating above the minimum regulatory capital. Supervisors should seek to intervene at an early stage to prevent capital from falling below the minimum levels required to support the risk characteristics of a particular bank and should require rapid remedial action if capital is not maintained or restored. 
+
+
+\subsection{The Third Pillar:- Market Discipline}
+\medskip
+
+This imposes market discipline by deploying a set of rigorous disclosure requirements. When market participants have a sufficient understanding of a bank's activities and the controls it has in place to manage its exposures, they are better able to distinguish between banking organizations so that they can reward those that manage their risks prudently and penalize those that do not. These disclosures are required to be made at least twice a year. 
+
+\subsection{Drawbacks}
+\medskip
+
+Basel II was supposed to create a safer banking world. It failed miserably in that task. Basel II contain many drawbacks which lead to it's failure such as false sense of security, reliance on rating agencies, etc. The major reasons for failure of Basel II are:
+\begin{itemize}
+
+\item The regulations favored big international banks, and hence it lowered overall competition.
+
+\item Better risk management but failed internal banks models with poor assumptions lead to failure of Basel II.
+
+\item Lack of the explicit implementation of other risks (e.g. systemic or liquidity)
+
+\item An excessive use of external ratings.
+
+\item Difficult quantification of operational risk such as NINJA loans, predatory lending, etc
+
+\item Higher instability and lower capital fueled financial crisis. Among the things that caused the financial crisis was that the Basel II committee and banks underestimated both the risk of losses on their assets and their exposure to the failure of others.  Requiring only the most threadbare of capital cushions for structured debt such as securitized mortgages, Basel II bank rules encouraged this obliviousness. 
+
+\item Many economist believe that Basel II failed because a small group of large international banks succeeded in rewriting the Basel II rules to their own advantage, at the expense of their smaller and emerging market competitors and, above all, financial stability. Basel II hence ended up reducing the capital levels in large international banks ignoring some of the risks most crucial to systemic financial stability.
+
+
+\item Banks were granted broad discretion to set their own risk preferences, with the understanding that riskier institutions would pay higher costs for the privilege through higher mandated capital. Thus, Basel II encouraged a wider range of banking activities and styles, since it was largely non-judgmental with respect to the absolute levels of risk banks assumed. Banks, in turn, engaged experts to develop risk management protocols that would attain the desired level of financial robustness. The national regulator verified the presence of such internally developed risk management systems, but did not verify their effectiveness, which was regarded as technically beyond the pale.
+
+\end{itemize} 
+Thus, something more relevant was necessary for proper risk managing and hence Basel III came into existence with new set of rules. 
+
+\pagebreak
+
+\section{Basel 2.5}
+\medskip
+Basel 2.5 is a complex package of international rules that imposes higher capital charges on banks for the market risks they run in their trading books, particularly credit-related products. The Basel Committee on Banking Supervision began the process of enhancing the Basel II market risk framework in 2005, and widened the scope in response to the subsequent financial crisis. It was given by Basel Committee on Banking Supervision on July 2009 after the losses experienced by banks during crisis 2007-2008 and is merely a revision to the Basel 2 market risk framework. Basel 2.5 was implemented on 31 December 2011.
+
+\subsection{Changes involved in Basel 2.5}
+\medskip
+
+There were three changes involving the calculation of a stressed VaR, a new incremental risk charge and a comprehensive risk measure for instruments dependent on credit correlation.
+
+\subsubsection{Calculation of Stressed value-at-risk}
+\medskip
+During 2003-2006 volatilities of market variables were low, so calculation of VaR using historical simulation of previous 250 days became very low and hence not much useful. In addition to calculating required capital for market risk as in Basel 2, Basel committee requires calculation of  stressed VaR by basing calculation on 250 day period of stressed market condition. These two VaRs are combined to calculate a total capital charge given by:
+$$ max( VaR_{t-1},m_c \times VaR_{avg} )+ max( sVaR_{t-1},m_s \times sVaR_{avg} )$$
+where $VaR_{t-1}$ and $sVaR_{t-1}$ are the VaR and stressed VaR  calculated on the previous day. $VaR_{avg}$ and $sVaR_{avg}$ are the average of VaR and stressed VaR calculated over the previous 60 days. $m_c$ and $m_s$ are multiplicative factors that are determined by bank supervisors and at minimum equal to 3. Calculation of VaR in stressed conditions is always greater than or equal to calculation of VaR in normal conditions. If we assume $m_c$ to be equal to $m_s$ then the capital required under Basel 2.5 is double of that of Basel II. 
+
+\hspace{1cm}Thus, Stressed VaR on the trading book helps to mitigate procyclicality of the minimum capital requirements for market risk, taking into account the period relating to significant losses, which must be calculated in addition to the VaR based on the most recent one to four observation period. 
+	
+
+\subsubsection{ Capital charge for incremental risk}
+Banks tended to hold credit-dependent instruments in the trading book whenever possible because the trading-book calculation usually gave rise to a much lower capital than the banking book calculation. So, regulators proposed incremental risk charge which considers calculating one year 99.9 \% VaR for losses from credit sensitive products in trading book considering changes in rating along with defaults. IRC considers liquidity horizon(time required to sell product with some risk in a stressed market) for each instrument and for VaR calculation over one year time horizon, if product rating changes or defaulted at the end of liquidity horizon then product is replaced by another product with same rating. This reduces one year 99.9 \% VaR and hence creates a constant level of risk assumption. The minimum liquidity horizon for IRC is specified by the Basel Committee as three months.
+
+\hspace{1cm} Thus, it estimates the default and migration risks of unsecuritized credit products over a one-year horizon at a 99.9 \% confidence level and takes liquidity into account. This acts as a supplement to the VaR based trading book framework. Banks separately calculates a specific risk charge for risks of credit spread change.
+
+\subsubsection{Comprehensive Risk Charge}
+\medskip
+
+Portfolio of instruments sensitive to the correlation between the default risk of different assets lies in correlation book and comprehensive risk charge takes into account risks of these type of instruments. Example of instruments dependent on credit correlation are asset backed securities and collateralized debt obligation. Under the standard approach, comprehensive risk charge for securitized and resecuritized instruments of different credit ratings is given by the table below:\medskip
+\begin{center}
+\begin{tabular}{|p{3cm}|p{1.5cm}|p{1.5cm}|p{2cm}|p{1.5cm}|p{2.5cm}|} \hline
+External Cedit & AAA to  & A+ to & BBB+ to & BB+ to & Below BB- \\ 
+ Assesment & AA- &  A- &  BBB- &  BB- &  or Unrated \\ \hline
+ Securitizations & 1.6\% & 4\% & 8\% & 28\% & Deduction \\
+ Resecuritizations & 3.2\% & 8\% & 18\% & 52\%  & Deduction \\ \hline
+ \end{tabular}
+ \end{center}
+ \medskip
+A deduction means than the principal amount is subtracted from capital, which is equivalent to a 100% capital
+charge. Thus, Comprehensive risk charge is for securitized products subject to strict qualitative minimum requirements as well as stress testing requirements.
+
+
+\subsection{Conclusion}
+\medskip
+Actually, Basel 2.5 measures are complex and difficult to implement. Even under the Basel II VaR regime, banks found it time-consuming and challenging to assess the marginal impact of a new trading position. Under Basel 2.5 this is even more so the case. Interest rate risk in the banking book is not specifically considered in Basel 2.5 and therefore still does not attract Pillar 1 regulatory capital charges of Basel 2.5. Also, Basel 2.5 does not take into account the absence of a capital charge on the risk of severe adverse changes in counterparties' creditworthiness within the trading book. So, something more efficient was necessary and hence proposal for Basel III came into existence. 
+
+\pagebreak
+
+\section{Credit Crisis}
+\subsection{Introduction}\medskip
+
+A crisis that occurs when several financial institutions issue or sell high-risk loans that start to default. As borrowers default on their loans, the financial institutions that issued the loans stop receiving payments. This is followed by a period in which financial institutions redefine the riskiness of borrowers, making it difficult for debtors to find creditors. 
+
+\subsection{Explanation}\medskip
+
+Credit crisis brings two group of people together. There are home owners that represents mortgages(in form of houses) and investors representing money in terms of pension funds etc. They are connected through banks together known as wall street. Houses are main street. Investors are unwilling to invest money in Federal reserve bank because of very low interest rate. This means borrowing money for banks become much easier due to low interest rate and banks started using leverages to make more money. Wall street connects investors to home owners through mortgages.\medskip
+ 
+\hspace{1cm}Moneylenders lend money to an individual using houses as collateral. By this, persons become home owners but are obligated to pay monthly payments. If they default, their houses will be taken. Now, moneylenders sell mortgages to bank and earn a huge amount of profit. Banks borrow more money to buy more mortgages and receive payments every month from different home owners. Banks then create a CDO out of these mortgages. This means creation of several tranches. Bottom tranche has the highest return compared to all other tranches and thus it becomes more riskier. Any default by home owner in their downpayments result in straightforward loss of payments of bottom tranche. Safest tranche or the upper tranche gives higher interest rate to the investors compared to federal reserve bank. Moreover, banks make safer tranche even safer by applying credit default swaps. Rating agencies rate the upper tranches AAA. In this way, investors see benefit in investing in upper tranches. Risk takers buy lower tranches. Banks repay money to federal reserve banks and using leverages make huge money. \medskip
+
+\hspace{1cm}Banks thought that prices of houses will always increase. To make more money, banks want more mortgages but moneylenders are not able to find anyone. Moneylenders start creating subprime mortgages which is even more riskier because they start providing loans to the persons without proper job, without proper family planning, etc. Banks then buy these sub prime mortgages and make CDO out of it and start selling to the investors without disclosing the actual risk associated with it. Different tranches are sold to different type of investors. Now, more and more home owners started to default and thus banks have too many houses to sell. Since supply of houses exceeds the demand, price of houses starts decreasing. Because of decrease in housing prices, default rate started to increase even more. Monthly payment became nil even in safer tranche. Banks now hold a bunch of worthless house which no one is ready to buy and price of houses start decreasing day by day. None of the investors are buying any tranches from banks because they know that there is no single drop of money flow even in the safest tranches. Banks are now unable to repay the loans taken from federal reserve banks. Money lenders are unable to sell subprime mortgages any more. This lead to frozen financial system. Everybody goes bankrupt. This lead to the credit crisis.
+
+\subsection{Effect}\medskip
+
+The 2008-2010 financial crisis has had wide ranging and long-term implications for the world and US economies. The crisis also has a significant impact on the personal finances of many US citizens. It's effects are: 
+\begin{itemize}
+\item Individuals suffered from the loss of growth and income that their savings and investments would have produced. Interest rates for savings have dropped sharply, leaving citizens struggling to find savings that will enable them to keep up with inflation.
+
+\item Investors have seen stock in many companies dropping rapidly, resulting in serious losses for individual investors and not just for the companies themselves of the financial industry.
+
+\item One of the most common ways in which the financial crisis has affected individual savings and investments has been through its effects on retirement funds. People who have been planning for a comfortable retirement using retirement plans that are often largely based on mutual funds and the performance of the stock market have had to face the fact that they may not be able to retire as and when they had planned. They may need to keep working longer or to reduce their expectations for retirement.
+
+\item The financial crisis has affected governmental and public institutions as well as private companies.
+
+\item Many individuals have also been affected by the financial crisis because of its effects on their employers. At the end of 2008 and beginning of 2009, the gross domestic product of the US, which is the total amount of goods and services produced by the country, was reduced by about six percent compared to the previous year. As many companies shave struggled to cope with the crisis, large numbers of people have lost their jobs. The unemployment rate grew to 10.1 percent in 2009, which was the highest it had been since 1983 and about twice the rate immediately before the crisis. It has become more difficult to find a new job. 
+
+\item Recent graduates looking for their first jobs have experienced similar difficulties in finding employment, which in combination with their student debts has resulted in serous problems for many young citizens.
+
+\item Borrowing money has now become more difficult. People are finding it harder to obtain low cost loans or credit cards, while expensive payday loan services have been flourishing. Qualifying for credit, particularly for a mortgage, has been made more difficult, and although this could help to prevent some of the problems of the past from arising again and leading to another crisis.
+
+\item Individuals who already owned their own home have tended to see its value drop dramatically. This has left some people repaying mortgages that are worth more than the current value of their property and it has become more difficult for many sellers to find a buyer who is willing to give them the price they desire.
+
+\end{itemize}
+
+\subsection{Conclusion}
+Thus, some rules were necessary for proper regulation of capital and management of risks and thus the Basal system came into existence which impose some capital requirement rules on banks to avoid financial collapse by managing credit risk, market risk, operational risk and other default risks.
+
+\pagebreak
+
+\section{Basel III}
+\medskip
+
+Basel III is a comprehensive set of reform measures designed to improve the regulation, supervision and risk management within the banking sector. Basel 3 developed by Basel Committee on Banking Supervision was first published in December 2009 after credit crisis 2007-2009 and is going to be released in December 2013. Through the accord, Basel committee wanted to increase capital requirements for credit risk and have more strict rules for liquidity risk. Largely in response to the credit crisis, banks are required to maintain proper leverage ratios. 
+
+\hspace{1cm}Major changes proposed in Basel III over earlier Accords i.e. Basel I and Basel II are:
+\subsection{Capital definition and requirements}
+\medskip
+
+ Better quality capital means the higher loss-absorbing capacity. The Total capital under Basel III are:
+ \subsubsection{Tier 1 equity capital}
+ \medskip
+ 
+  This includes share capital and retained earnings excluding goodwill or deferred tax assets. It does not include retained earnings from securitized transactions and bank's own credit risk. Tier 1 equity capital required by banks is greater than or equal to 4.5 \% of risk weighted assets.
+
+\subsubsection{Additional Tier 1 capital}
+\medskip
+
+It consists of items, such as non-cumulative preferred stock. Additional Tier 1 capital required by banks is such that Tier 1 equity capital + additional Tier 1 capital is 6 \% of risk weighted assets.
+
+\subsubsection{Tier 2 capital}
+\medskip
+
+It consists of subordinate debt to depositors with maturity of five years.  Tier 2 capital required by banks is such that Tier 1 + Tier 2 capital is greater than or equal to 8 \% of risk weighted assets.
+
+\hspace{1cm} Tier 3 capital implemented in Basel II is removed in Basel III Accord. In the United States, all banks with more than \$50 billion in assets are considered systemically important and hence are required to keep even more capital. Thus, Basel III capital requirement rules are more challenging as the percentages of minimum capital requirements has increased.
+
+\subsection{Capital Conservation Buffer}
+\medskip
+
+The capital conservation buffer is designed to ensure that banks build up capital buffers which can be drawn down during the period of stress as losses are  incurred. Under the regulation, banks are required to hold a capital conservation buffer of 2.5 \% of risk weighted asset. The aim of  asking to build conservation buffer is to ensure that banks maintain a cushion of capital that can be used to absorb losses during periods of financial and economic stress. Normally, banks can build up capital buffer by retaining their profits and retained earnings, which means reducing discretionary distributions of earnings. These activities include reducing dividend payments, share buy-backs, and staff bonus payments. Banks may also choose to raise new capital from the private sector, as an alternative to conserving internally generated capital. If the buffer is partially or wholly used up, then to fill it up banks are required to constrain their dividends where the constraints are given by the regulations. In normal times, Tier 1 equity capital that banks are required to keep is 7\%, total Tier 1 capital required is at least 8.5\%, Tier 1 plus Tier 2 capital  required is at least 10.5\% of risk-weighted assets while during stressed conditions the number can decline to 4.5\%, 6\% and 8\%  but banks are then under pressure to bring capital back up to the required levels. It will be phased in between January 1, 2016, and January 1, 2019.
+
+\subsection{Countercyclical Buffer}
+\medskip
+
+Similar to conservation buffer capital, it has been introduced with the objective to increase capital requirements in good times and decrease the same in bad times. The buffer will range from 0 \% to 2.5 \%, consisting of common equity or other fully loss-absorbing capital. Its level of implementation depends on national authorities of a particular country. The aim is to achieve the broader macro-prudential goal of protecting the banking sector from the period of excessive credit growth, which has often been associated with the build-up of system-wide risk. This objective is different from that of conservation buffer, which focuses on individual banks' financial conditions. It will also be phased in between January 1, 2016, and January 1, 2019.
+
+\subsection{Leverage Ratio}
+\medskip
+
+ Leverage ratio is the relative amount of capital to total exposure consisting items on balance sheet without any risk weighting and some off balance sheet items such as loan commitments. The ratio should be calculated as the simple arithmetic mean of the monthly leverage ratios over a quarter. Basel 3 accord requires leverage ratio to be greater than or equal to 3 \%. 
+
+\subsection{Liquidity Risk}
+\medskip
+
+The risk stemming from the lack of marketability of an investment that cannot be bought or sold quickly enough to prevent or minimize a loss is called liquidity risk. A review of the financial crisis of 2008 has indicated that many losses faced by banks were due to liquidity risk taken by the banks. There is a tendency for banks to finance long-term needs with short-term funding. After a particular funding matures, banks refinances with a new issue and so on which creates financial difficulties. Liquidity risk arises from situations in which a party interested in trading an asset cannot do it because nobody in the market wants to trade for that asset. Liquidity risk becomes particularly important to parties who are about to hold or currently hold an asset, since it affects their ability to trade. Liquidity risk is financial risk due to uncertain liquidity. 
+
+\hspace{1cm}For banks to survive liquidity pressure, committee introduced two type of ratios liquidity coverage ratio and net stable funding ratio.
+
+\subsubsection{Liquidity Coverage Ratio(LCR)}
+\medskip
+
+The Liquidity coverage ratio is designed to ensure that financial institutions have the necessary assets on hand to ride out short-term liquidity disruptions. Banks are required to hold an amount of highly-liquid assets, such as cash or Treasury bonds, equal to or greater than their net cash over a 30 day period.  It is given by the formula
+\[ LCR = \frac{High\: Quality\: Liquid\: Asset}{Net\: Cash\: Outflow\: in\: 30\: days\: period}\]
+where 30 day period is the period of unwelcomed stress. Basel regulation require the ratio to be greater than 1. LCR is to be introduced in 2015.
+\subsubsection{Net Stable Funding Ratio(NSFR)}
+\medskip
+
+The net stable funding (NSF) ratio measures the amount of longer-term, stable sources of funding employed by an institution relative to the liquidity profiles of the assets funded and the potential for contingent calls on funding liquidity arising from off-balance sheet commitments and obligations. The standard requires a minimum amount of funding that is expected to be stable over a one year time horizon based on liquidity risk factors assigned to assets and off-balance sheet liquidity exposures. The NSF ratio is intended to promote longer-term structural funding of banks’ balance sheets, off-balance sheet exposures and capital markets activities. It is given by the formula
+\[ NSFR = \frac{Amount\: of\: Stable\: Funding}{Required\: Amount\: of\: Stable\: Funding}\]
+Amount of stable funding is calculated by multiplying each funding class by ASF or available stable funding factor while required amount is calculated by multiplying assets and off balance sheet items requiring funding by RSF or required stable funding factor.  These factors are given under the regulations for different categories. ASF for Tier 1 and Tier 2 are greater than retail deposits which in turn is greater than wholesale deposits. Basel regulation requires the ratio to be greater than 1. NSFR is to be introduced in 2018.
+
+\subsection{ Counterparty Credit Risk}
+\medskip
+
+ Credit value adjustment (CVA) is the difference between the risk-free portfolio value and the true portfolio value that takes into account the possibility of a counterparty's default. In other words, CVA is the market value of counterparty credit risk.
+ 
+\hspace{1cm}CVA is calculated by bank against each derivative counterparty. CVA for a counterparty can change due to the changes in market variables underlying the value of derivative concerned with counterparty and changes in credit spreads for counterparty's borrowing. Regulation under Basel III merge CVA risk due to changing credit spreads into market risk VaR calculations.\\
+
+\subsection{Comparison of capital requirements between Basel II and Basel III }
+\medskip
+
+\begin{tabular}{|l|c|r|} \hline
+Requirements & Under Basel II & Under Basel III \\ \hline
+Minimum ratio of capital to total risk weighted assets(RWAs) & 8\% & 10.5\%\\ \hline
+Minimum ratio of common equity to RWAs & 2\% & 4.5\% to 7\% \\ \hline
+ Tier I capital to RWAs & 4\% & 6\% \\ \hline
+ Core Tier I capital to RWAs & 2\% & 5\% \\ \hline
+ Capital conservation buffer to RWAs & None & 2.5\% \\ \hline
+ Leverage ratio & None & 3\% \\ \hline
+ Countercyclical buffer & None & 0\% to 2.5\% \\ \hline
+ Minimum liquidity coverage ratio & None & TBD(2015)\\ \hline
+ Minimum net stable funding ratio & None & TBD(2018)\\ \hline
+ % Systemically important financial institutions charge & None & TBD(2011)  \\ \hline
+ 
+\end{tabular}
+
+\subsection{Impact on Indian Banks}
+\medskip
+
+The Basel III which is to be implemented by banks in India as per the guidelines issued by RBI from time to time, will be challenging task not only for the banks but also for government of India. Following points are matter of concern: 
+\begin{itemize}
+\item It is estimated that Indian banks will be required to raise Rs 6,00,000 crores in external capital in next nine years or so i.e. by 2020 (The estimates vary from organisation to organisation). Expansion of capital to this extent will affect the returns on the equity of these banks specially public sector banks. 
+
+\item The government's large fiscal deficit will limit it's ability to inject capital into government-owned banks which currently have less capital adequacy than the private and foreign banks operating in India.
+
+\item One of the things happening is that with the new banks coming into the scene in India, with RBI granting new licenses, this should pump additional capital into the system. So, whatever lending was with 20-30 banks would spread to 40-50 banks and the capital requirement would be better at same capital base. But instead of raising capital, banks would reduce lending, which would happen naturally as competition increases.
+
+\item  Under the Basel III framework, common equity requirements are in some instances more than double than before.  This leads to a significant reduction of available capital required by a bank to do business. In addition, increased charges for the risk weighted assets of a bank may further restrict the extent to which they may do business. With so much additional capital maintained and host of other changes, experts are predicting return on equity to fall drastically. So, banking is no longer a great business if not managed well.
+
+\end{itemize} 
+ Thus Basel III will highly affect profitability, capital acquisition, liquidity needs, limits on lending, banks consolidation, pressure on yield on assets, pressure on return on equity, stability in banking system. However, only consolation for Indian banks is the fact that historically our banks have maintained their core and overall capital well in excess of the regulatory minimum.
+
+
+\subsection{Phase of development}
+\medskip
+
+The ongoing development of Basel III is shown on the following \hyperref[tab:xyz]{table}: 
+
+\pagebreak
+
+\begin{landscape}
+\begin{table}
+\caption{\textbf{Phase in arrangement for Basel III}}
+%\centring
+\begin{tabular}{|p{5cm}|p{2cm}|p{2cm}|p{1.5cm}|p{1.5cm}|p{1.7cm}|p{1.5cm}|p{1.5cm}|p{2.3cm}|p{1.5cm}|}
+\hline
+& \multirow{3}{*}{2011} & \multirow{3}{*}{2012} & \multirow{3}{*}{2013} & \multirow{3}{*}{2014} & \multirow{3}{*}{2015} & \multirow{3}{*}{2016} & \multirow{3}{*}{2017} & \multirow{3}{*}{2018} & As of \:  Jan 1, \: 2019\\
+\hline
+\multirow{3}{*}{\textbf{Leverage ratio}} & \multicolumn{2}{ c| }{\multirow{3}{*}{Supervisory monitory}} & \multicolumn{4}{ c| }{Parallel run} & & {Migration to} & \\ 
+& \multicolumn{2}{ c| }{} & \multicolumn{4}{ c| }{1 Jan 2013 - 1 Jan 2017} &  &  pillar 1  & \\ 
+& \multicolumn{2}{ c| }{} & \multicolumn{4}{ c| }{Disclosure start 1 Jan 2015} &  &  & \\
+\hline
+\textbf{Minimum common equity capital ratio}& & & \multirow{2}{*}{3.5\%} & \multirow{2}{*}{4\%} &  \multirow{2}{*}{4.5\%} &  \multirow{2}{*}{4.5\%}  &  \multirow{2}{*}{4.5\%} &  \multirow{2}{*}{4.5\%} &  \multirow{2}{*}{4.5\%} \\
+\hline
+\textbf{Capital Conservation \: \: Buffer} &&&&&&  \multirow{2}{*}{0.625\%} &  \multirow{2}{*}{1.25\%} &  \multirow{2}{*}{1.875\%} &  \multirow{2}{*}{2.5\%} \\
+\hline
+\textbf{Minimum common equity plus capital conservation buffer}& & &  \multirow{3}{*}{3.5\%} &  \multirow{3}{*}{4\%} &  \multirow{3}{*}{4.5\%} &  \multirow{3}{*}{5.125\%} &  \multirow{3}{*}{5.175\%} &  \multirow{3}{*}{6.375\%} &  \multirow{3}{*}{7\%} \\
+\hline
+
+\textbf{Phase in deduction from CET 1(including amounts exceeded the limits for DTAs, MSRs and financials)} & & & &  \multirow{5}{*}{20\%}&\multirow{5}{*}{40\%}&\multirow{5}{*}{60\%}&\multirow{5}{*}{80\%}&\multirow{5}{*}{100\%}&\multirow{5}{*}{100\%}\\
+\hline
+
+\textbf{Minimum Tier 1 capital}&&& 4.5\% & 5.5\% & 6\% & 6\% & 6\% & 6\% & 6\% \\
+ \hline
+ 
+ \textbf{Minimum total capital}&&& 8\% & 8\% & 8\% & 8\% & 8\% & 8\% & 8\% \\
+ \hline
+ 
+ \textbf{Minimum total capital plus conservation buffer } & & &  \multirow{2}{*}{8\%} &  \multirow{2}{*}{8\%} &  \multirow{2}{*}{8\%} &  \multirow{2}{*}{8.625\%} &  \multirow{2}{*}{9.125\%} &  \multirow{2}{*}{9.875\%} &  \multirow{2}{*}{10.5\%} \\
+\hline
+
+\textbf{Capital instruments that no longer qualify as non core Tier 1 capital or Tier 2 capital} & \multicolumn{2}{ c| }{\multirow{4}{*}{}} & \multicolumn{7}{ c| }{\multirow{4}{*}{Passed out over 10 year horizon beginning 2013.} } \\ 
+\hline
+\multicolumn{10}{ c }{}\\[1.5ex]
+
+\hline
+\multirow{3}{*}{\textbf{Liquidity coverage ratio}}& Observation period \: \:  begins &&&& introduce \: minimum standard &&&&\\
+\hline
+
+\multirow{3}{*}{\textbf{Net stable funding ratio}}& & Observation period \: \:  begins &&&&&& introduce \: minimum standard &\\
+\hline
+\end{tabular}
+\phantomsection
+\label{tab:xyz}
+%\end{sidewaystable}
+\end{table}
+\end{landscape}
+
+\subsection{Why Basel III can fail}
+Whether Basel III will become successful in managing risk or not is a prime question in everyone's mind but according to me it may fail due to following reasons: 
+
+\begin{itemize}
+\item Almost all Basel ratios are arbitrary, arrived at by an opaque committee process, often rationalized by a post implementation Quantitative Impact Study (QIS); Basel III is no different. 
+
+\item The fundamental premise of Basel regulation is that increase in capital requirements will drive bankers to be better at making risk decisions. But because Basel capital rules are arbitrary, incomplete and ultimately deceptive, banking executives and boards will be driven to find ways to avoid, rather than comply with, the updated regulations. 
+
+\item History has shown that bankers used derivatives to avoid the spirit of Basel I, and off-balance sheet structures (such as SIVs) to avoid Basel II; it is only a matter of time before they come up with a perfectly legal scheme to do an end-run around Basel III also. 
+
+\item  In Basel III, there is no legal sanction upon actions of the bank; if banks get caught, they (or rather their shareholders) will happily pay a large monetary settlement without admitting fault.
+
+\item  Rating agencies, which were the basis of Basel II calculations, lead to financial crisis cannot be trusted but Basel III does not take care of this problem. 
+
+\item Pillar 3, which is designed to encourage market discipline is a total failure. In practice, banks provide, at best, the minimum information needed to comply with what are, to start with, very minimal reporting requirements. There is no analysis of the figures calculated by banks, with no indication of precisely which risk taking activities are being rewarded and which not? This is a pure box ticking exercise, and risk cannot be properly managed in these ways. 
+
+\end{itemize} 
+
+\subsection{Conclusion}
+\medskip
+
+Thus, exercising controls on the capital, liquidity and leverages of bank will ensure the ability to withstand crisis. But still Basel III Accord capital requirements are much more than any other Basel norms and hence more difficult to implement.   
+
+\end{document}
